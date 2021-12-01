@@ -234,6 +234,7 @@ TEST(lab4_tests, IdentityMatrix) {
 
 TEST(lab4_tests,TriangularMatrix) {
   TriangularMatrix q(3);
-
-
+  ASSERT_STREQ(q.get_matrix(),"1 1 1 \n0 1 1 \n0 0 1 \n");
+  TriangularMatrix w(5);
+  ASSERT_STREQ(w.get_matrix(), "1 1 1 1 1 \n0 1 1 1 1 \n0 0 1 1 1 \n0 0 0 1 1 \n0 0 0 0 1 \n");
 }

@@ -8,15 +8,16 @@
 #include "Matrix.h"
 
 class TriangularMatrix : public Matrix {
- protected:
+ private:
   int *nums;
  public:
   TriangularMatrix();
   TriangularMatrix(const TriangularMatrix &);
-  TriangularMatrix(const Matrix &);
-  TriangularMatrix(int order);
+  char *get_matrix() override;
+  explicit TriangularMatrix(int order);
   void operator()(unsigned int i, unsigned int j, int val);
-  int operator[](int a);
+  int *operator[](int a) override;
+  ~TriangularMatrix();
 };
 
 #endif //MATRIXES_SRC_TRIANGULARMATRIX_H_

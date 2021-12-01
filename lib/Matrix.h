@@ -35,7 +35,7 @@ class Matrix {
   void matrix_resize(int height, int width);
   void add_column(int *a);
   void add_line(const int *a);
-  char *get_matrix();
+  virtual char *get_matrix();
   int get_num(int x, int y);
   int get_height() const;
   int get_width() const;
@@ -43,7 +43,7 @@ class Matrix {
   int set_matrix_from_file(int file);
   void sort_by_line(int n);
   void sort_by_column(int n);
-  int *operator[](int a);
+  virtual int *operator[](int a);
   Matrix &operator=(const Matrix &a);
   Matrix operator+(Matrix &a);
   Matrix operator-(Matrix &a);
