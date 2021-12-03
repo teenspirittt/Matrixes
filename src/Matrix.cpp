@@ -1,5 +1,5 @@
 #include "../lib/Matrix.h"
-
+#include <exception>
 #include <cmath>
 #include <iostream>
 #include <fstream>

@@ -1,7 +1,3 @@
-//
-// Created by vladi on 17.11.2021.
-//
-
 #ifndef MATRIXES_SRC_IDENTITYMATRIX_H_
 #define MATRIXES_SRC_IDENTITYMATRIX_H_
 
@@ -10,9 +6,9 @@
 class IdentityMatrix : public Matrix {
  public:
   IdentityMatrix();
-  IdentityMatrix(const Matrix &copy);
-  IdentityMatrix(unsigned int order);
-
+  explicit IdentityMatrix(const Matrix &copy);
+  explicit IdentityMatrix(unsigned int order);
+  ~IdentityMatrix() {};
 };
 
 #endif //MATRIXES_SRC_IDENTITYMATRIX_H_

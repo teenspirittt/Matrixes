@@ -3,6 +3,7 @@
 #include "../lib/IdentityMatrix.h"
 #include "../lib/TriangularMatrix.h"
 #include "../lib/Matrix.h"
+#include "../lib/Node.h"
 #include "gtest/gtest.h"
 
 TEST(lab1_tests, constructor_tests) {
@@ -232,9 +233,29 @@ TEST(lab4_tests, IdentityMatrix) {
   ASSERT_STREQ(r.get_matrix(), "2 0 0 0 0 \n0 2 0 0 0 \n0 0 2 0 0 \n0 0 0 2 0 \n0 0 0 0 2 \n");
 }
 
-TEST(lab4_tests,TriangularMatrix) {
+TEST(lab4_tests, TriangularMatrix) {
   TriangularMatrix q(3);
-  ASSERT_STREQ(q.get_matrix(),"1 1 1 \n0 1 1 \n0 0 1 \n");
+  ASSERT_STREQ(q.get_matrix(), "1 1 1 \n0 1 1 \n0 0 1 \n");
   TriangularMatrix w(5);
   ASSERT_STREQ(w.get_matrix(), "1 1 1 1 1 \n0 1 1 1 1 \n0 0 1 1 1 \n0 0 0 1 1 \n0 0 0 0 1 \n");
+}
+
+TEST(lab5_tests, constructor) {
+  List lst;
+  Matrix q(3, 3);
+  TriangularMatrix w(3);
+  IdentityMatrix e(3);
+  lst.add(&w);
+  lst.add(&q);
+  lst.add(&e);
+  lst.show(lst.count());
+  Matrix io(7, 7);
+  lst.add(&io);
+  std::cout << std::endl;
+  std::cout << std::endl;
+  lst.show(lst.count());
+  lst.del_by_pos(0);
+  std::cout << std::endl;
+  std::cout << std::endl;
+  lst.show(lst.count());
 }
