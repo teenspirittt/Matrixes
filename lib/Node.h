@@ -14,15 +14,16 @@ class List {
   void del();
   void show(int size);
   int count();
+  Matrix &operator[](int d);
  private:
   struct Node {
     Matrix *field;
     struct Node *next;
-   /* Node(Matrix *b) {
-      field = b;
-      next = tail;
-    }
-     //~Node();*/
+    /* Node(Matrix *b) {
+       field = b;
+       next = tail;
+     }
+      //~Node();*/
   };
   Node *head;
   Node *tail;

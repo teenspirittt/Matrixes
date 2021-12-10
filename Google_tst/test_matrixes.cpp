@@ -240,22 +240,42 @@ TEST(lab4_tests, TriangularMatrix) {
   ASSERT_STREQ(w.get_matrix(), "1 1 1 1 1 \n0 1 1 1 1 \n0 0 1 1 1 \n0 0 0 1 1 \n0 0 0 0 1 \n");
 }
 
-TEST(lab5_tests, constructor) {
+TEST(lab5_tests, polymorf) {
   List lst;
-  Matrix q(3, 3);
-  TriangularMatrix w(3);
-  IdentityMatrix e(3);
-  lst.add(&w);
-  lst.add(&q);
-  lst.add(&e);
-  lst.show(lst.count());
+  Matrix M(3, 3);
+  TriangularMatrix T(3);
+  IdentityMatrix I(3);
   Matrix io(7, 7);
+  ASSERT_EQ(lst.count(), 0);
+  lst.add(&T);
+  ASSERT_EQ(lst.count(), 1);
+  lst.add(&M);
+  ASSERT_EQ(lst.count(), 2);
+  lst.add(&I);
+  ASSERT_EQ(lst.count(), 3);
   lst.add(&io);
-  std::cout << std::endl;
-  std::cout << std::endl;
-  lst.show(lst.count());
-  lst.del_by_pos(0);
-  std::cout << std::endl;
-  std::cout << std::endl;
-  lst.show(lst.count());
+  ASSERT_EQ(lst.count(), 4);
+  lst.del();
+  ASSERT_EQ(lst.count(), 3);
+  lst.add(&io);
+  ASSERT_EQ(lst.count(), 4);
+  lst.del();
+  lst.del();
+  ASSERT_EQ(lst.count(), 2);
+  lst.del();
+  lst.add(&T);
+  lst.del();
+  ASSERT_EQ(lst.count(), 1);
+  lst.add(&M);
+  lst.add(&T);
+  ASSERT_EQ(lst.count(), 3);
+  lst.add(&I);
+  ASSERT_EQ(lst.count(), 4);
+  lst.add(&io);
+  ASSERT_EQ(lst.count(), 5);
+  ASSERT_STREQ(lst[0].get_matrix(),T.get_matrix());
+  ASSERT_STREQ(lst[1].get_matrix(),M.get_matrix());
+  ASSERT_STREQ(lst[2].get_matrix(),T.get_matrix());
+  ASSERT_STREQ(lst[3].get_matrix(),I.get_matrix());
+  ASSERT_STREQ(lst[4].get_matrix(),io.get_matrix());
 }

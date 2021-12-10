@@ -91,4 +91,14 @@ List::~List() {
     size--;
   }
 }
+Matrix &List::operator[](int d) {
+  Node *tmp = head;
+  for (int i = 0; i < d; ++i) {
+    if (tmp->next == nullptr)
+      throw out_of_range("Out of list range");
+    tmp = tmp->next;
+  }
+  head->field = tmp->field;
+  return *(tmp->field);
 
+}
