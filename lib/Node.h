@@ -13,7 +13,7 @@ class List {
   void add(Matrix *field);
   void del();
   void show(int size);
-  int count();
+  int count() const;
   Matrix &operator[](int d);
  private:
   struct Node {

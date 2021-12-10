@@ -1,5 +1,5 @@
 #include <iostream>
-#include "../lib/Node.h"
+#include "../lib/UniversalNode.h"
 
 /*List::List(Matrix *a) {
   Node *tmp = new Node(a);
@@ -7,8 +7,8 @@
   tmp->next = tmp;
 }*/
 
-
-void List::del() {
+template<typename T>
+void UniversalList<T>::del() {
   Node *tmp = head;
   if (head != nullptr && tmp != nullptr) {
     head = head->next;
@@ -17,38 +17,26 @@ void List::del() {
   }
 }
 
-void List::add(Matrix *field) {
-  Node *tmp = new Node;
-  tmp->next = head;
-  tmp->field = field;
-  if (head != nullptr) {
-    tail->next = tmp;
-    tail = tmp;
-  } else {
-    head = tail = tmp;
-  }
-  size++;
-}
-
-void List::add_by_pos(Matrix *a, unsigned int pos) {
+template<typename T>
+void UniversalList<T>::add_by_pos(T *a, unsigned int pos) {
   if (pos == 0)
     add(a);
   else {
-    Node *tmp = new Node;
-    tmp->field = a;
-    tmp->next = head;
-    Node *prev = head;
-    for (unsigned int i = size; i > pos - 1; i--) {
-      prev = prev->next;
+    Node *tmp = head;
+    for (int i = 0; i < pos - 1; i++) {
+      if (tmp->next == nullptr)
+        throw out_of_range("Out of list range");
+      tmp = tmp->next;
     }
-    Node *elem = prev->next;
-    prev->next = tmp;
+    Node *elem = new Node;
+    elem->next = tmp->next;
     tmp->next = elem;
   }
   size++;
 }
 
-void List::del_by_pos(unsigned int pos) {
+template<typename T>
+void UniversalList<T>::del_by_pos(unsigned int pos) {
   if (pos == 0) {
     if (head != nullptr) {
       Node *tmp = head->next;
@@ -70,9 +58,22 @@ void List::del_by_pos(unsigned int pos) {
   size--;
 }
 
+template<typename T>
+void UniversalList<T>::add(T *field) {
+  Node *tmp = new Node;
+  tmp->next = head;
+  tmp->field = field;
+  if (head != nullptr) {
+    tail->next = tmp;
+    tail = tmp;
+  } else {
+    head = tail = tmp;
+  }
+  size++;
+}
 
-
-void List::show(int size) {
+template<typename T>
+void UniversalList<T>::show(int size) {
   Node *tmp_head = head;
   int tmp = size;
   while (tmp != 0) {
@@ -82,11 +83,13 @@ void List::show(int size) {
   }
 }
 
-int List::count() const {
+template<typename T>
+int UniversalList<T>::count() {
   return size;
 }
 
-List::~List() {
+template<typename T>
+UniversalList<T>::~UniversalList() {
   while (size != 0) {
     Node *tmp = head->next;
     delete head;
@@ -95,12 +98,15 @@ List::~List() {
   }
 }
 
-Matrix &List::operator[](int d) {
+template<typename T>
+Matrix &UniversalList<T>::operator[](int d) {
   Node *tmp = head;
   for (int i = 0; i < d; ++i) {
     if (tmp->next == nullptr)
       throw out_of_range("Out of list range");
     tmp = tmp->next;
   }
+  head->field = tmp->field;
   return *(tmp->field);
+
 }
