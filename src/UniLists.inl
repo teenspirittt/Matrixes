@@ -16,6 +16,7 @@ void UniversalList<T>::del() {
 
 template<typename T>
 void UniversalList<T>::add(T *a, unsigned int pos) {
+
   if (pos == 0)
     add(a);
   else {
@@ -75,6 +76,17 @@ void UniversalList<T>::show() {
   Node *tmp_head = head;
   unsigned int tmp = size;
   while (tmp != 0) {
+    std::cout << *tmp_head->field << std::endl;
+    tmp_head = tmp_head->next;
+    tmp--;
+  }
+}
+
+template<>
+void UniversalList<Matrix>::show() {
+  Node *tmp_head = head;
+  unsigned int tmp = size;
+  while (tmp != 0) {
     std::cout << tmp_head->field->get_matrix();
     tmp_head = tmp_head->next;
     tmp--;
@@ -104,9 +116,7 @@ T &UniversalList<T>::operator[](int d) {
       throw out_of_range("Out of list range");
     tmp = tmp->next;
   }
-  head->field = tmp->field;
   return *(tmp->field);
-
 }
 
 #endif // MATRIXES_SRC_UNILISTS_INL_
