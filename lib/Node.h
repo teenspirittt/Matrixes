@@ -6,12 +6,14 @@
 class List {
  public:
   List() : head(nullptr), tail(nullptr), size(0) {};
-  List(Matrix *a);
+
   ~List();
-  void add_by_pos(Matrix *a, unsigned int pos);
-  void del_by_pos(unsigned int pos);
+
+
   void add(Matrix *field);
+  void add(Matrix *a, unsigned int pos);
   void del();
+  void del(unsigned int pos);
   void show(int size);
   int count() const;
   Matrix &operator[](int d);

@@ -30,7 +30,7 @@ void List::add(Matrix *field) {
   size++;
 }
 
-void List::add_by_pos(Matrix *a, unsigned int pos) {
+void List::add(Matrix *a, unsigned int pos) {
   if (pos == 0)
     add(a);
   else {
@@ -48,7 +48,7 @@ void List::add_by_pos(Matrix *a, unsigned int pos) {
   size++;
 }
 
-void List::del_by_pos(unsigned int pos) {
+void List::del(unsigned int pos) {
   if (pos == 0) {
     if (head != nullptr) {
       Node *tmp = head->next;

@@ -1,11 +1,8 @@
-#include <iostream>
-#include "../lib/UniversalNode.h"
+#ifndef MATRIXES_SRC_UNILISTS_INL_
+#define MATRIXES_SRC_UNILISTS_INL_
 
-/*List::List(Matrix *a) {
-  Node *tmp = new Node(a);
-  tmp->field = a;
-  tmp->next = tmp;
-}*/
+#include <iostream>
+#include "../lib/UniLists.h"
 
 template<typename T>
 void UniversalList<T>::del() {
@@ -18,25 +15,26 @@ void UniversalList<T>::del() {
 }
 
 template<typename T>
-void UniversalList<T>::add_by_pos(T *a, unsigned int pos) {
+void UniversalList<T>::add(T *a, unsigned int pos) {
   if (pos == 0)
     add(a);
   else {
-    Node *tmp = head;
-    for (int i = 0; i < pos - 1; i++) {
-      if (tmp->next == nullptr)
-        throw out_of_range("Out of list range");
-      tmp = tmp->next;
+    Node *tmp = new Node;
+    tmp->field = a;
+    tmp->next = head;
+    Node *prev = head;
+    for (unsigned int i = size; i > pos - 1; i--) {
+      prev = prev->next;
     }
-    Node *elem = new Node;
-    elem->next = tmp->next;
+    Node *elem = prev->next;
+    prev->next = tmp;
     tmp->next = elem;
   }
   size++;
 }
 
 template<typename T>
-void UniversalList<T>::del_by_pos(unsigned int pos) {
+void UniversalList<T>::del(unsigned int pos) {
   if (pos == 0) {
     if (head != nullptr) {
       Node *tmp = head->next;
@@ -73,11 +71,11 @@ void UniversalList<T>::add(T *field) {
 }
 
 template<typename T>
-void UniversalList<T>::show(int size) {
+void UniversalList<T>::show() {
   Node *tmp_head = head;
-  int tmp = size;
+  unsigned int tmp = size;
   while (tmp != 0) {
-    std::cout << tmp_head->field->get_matrix() << " ";
+    std::cout << tmp_head->field->get_matrix();
     tmp_head = tmp_head->next;
     tmp--;
   }
@@ -99,7 +97,7 @@ UniversalList<T>::~UniversalList() {
 }
 
 template<typename T>
-Matrix &UniversalList<T>::operator[](int d) {
+T &UniversalList<T>::operator[](int d) {
   Node *tmp = head;
   for (int i = 0; i < d; ++i) {
     if (tmp->next == nullptr)
@@ -110,3 +108,5 @@ Matrix &UniversalList<T>::operator[](int d) {
   return *(tmp->field);
 
 }
+
+#endif // MATRIXES_SRC_UNILISTS_INL_

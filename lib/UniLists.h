@@ -8,29 +8,25 @@ template<typename T>
 class UniversalList {
  public:
   UniversalList() : head(nullptr), tail(nullptr), size(0) {};
-  UniversalList(T*a);
   ~UniversalList();
-  void add_by_pos(T *a, unsigned int pos);
-  void del_by_pos(unsigned int pos);
   void add(T *field);
+  void add(T *a, unsigned int pos);
   void del();
-  void show(int size);
+  void del(unsigned int pos);
+  void show();
   int count();
-  Matrix &operator[](int d);
+  T &operator[](int d);
  private:
   struct Node {
     T *field;
     struct Node *next;
-    /* Node(Matrix *b) {
-       field = b;
-       next = tail;
-     }
-      //~Node();*/
   };
   Node *head;
   Node *tail;
-  int size;
+  unsigned int size;
 };
+
+#include "../src/UniLists.inl"
 
 
 

@@ -4,6 +4,7 @@
 #include "../lib/TriangularMatrix.h"
 #include "../lib/Matrix.h"
 #include "../lib/Node.h"
+#include "../lib/UniLists.h"
 #include "gtest/gtest.h"
 
 TEST(lab1_tests, constructor_tests) {
@@ -281,28 +282,40 @@ TEST(lab5_tests, polymorf) {
   ASSERT_STREQ(lst[2].get_matrix(), T.get_matrix());
   ASSERT_STREQ(lst[3].get_matrix(), I.get_matrix());
   ASSERT_STREQ(lst[4].get_matrix(), io.get_matrix());
-  lst.del_by_pos(2);
+  lst.del(2);
   ASSERT_EQ(lst.count(), 4);
   ASSERT_STREQ(lst[0].get_matrix(), T.get_matrix());
   ASSERT_STREQ(lst[1].get_matrix(), M.get_matrix());
   ASSERT_STREQ(lst[2].get_matrix(), I.get_matrix());
   ASSERT_STREQ(lst[3].get_matrix(), io.get_matrix());
-  lst.del_by_pos(3);
+  lst.del(3);
   ASSERT_EQ(lst.count(), 3);
   ASSERT_STREQ(lst[0].get_matrix(), T.get_matrix());
   ASSERT_STREQ(lst[1].get_matrix(), M.get_matrix());
   ASSERT_STREQ(lst[2].get_matrix(), I.get_matrix());
-  lst.add_by_pos(&TR,1);
+  lst.add(&TR,1);
   ASSERT_EQ(lst.count(), 4);
   ASSERT_STREQ(lst[0].get_matrix(), T.get_matrix());
   ASSERT_STREQ(lst[1].get_matrix(), TR.get_matrix());
   ASSERT_STREQ(lst[2].get_matrix(), M.get_matrix());
   ASSERT_STREQ(lst[3].get_matrix(), I.get_matrix());
-  lst.add_by_pos(&IM,3);
+  lst.add(&IM,3);
   ASSERT_EQ(lst.count(), 5);
   ASSERT_STREQ(lst[0].get_matrix(), T.get_matrix());
   ASSERT_STREQ(lst[1].get_matrix(), TR.get_matrix());
   ASSERT_STREQ(lst[2].get_matrix(), M.get_matrix());
   ASSERT_STREQ(lst[3].get_matrix(), IM.get_matrix());
   ASSERT_STREQ(lst[4].get_matrix(), I.get_matrix());
+}
+
+TEST(lab7_tests, templates) {
+  UniversalList<int> lst;
+  int n1 = 1;
+  int n2 = 2;
+  int *num1 = &n1;
+  int *num2 = &n2;
+  lst.add(num1);
+  lst.add(num2);
+  std::cout << lst[0];
+  std::cout << lst[1];
 }
