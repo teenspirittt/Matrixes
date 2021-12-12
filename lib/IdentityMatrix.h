@@ -4,11 +4,11 @@
 #include "Matrix.h"
 
 class IdentityMatrix : public Matrix {
- public:
-  IdentityMatrix();
-  explicit IdentityMatrix(const Matrix &copy);
-  explicit IdentityMatrix(unsigned int order);
-  ~IdentityMatrix() {};
+public:
+	IdentityMatrix();
+	explicit IdentityMatrix(const Matrix& copy);
+	explicit IdentityMatrix(unsigned int order);
+	~IdentityMatrix() { };
 };
 
 #endif //MATRIXES_SRC_IDENTITYMATRIX_H_
