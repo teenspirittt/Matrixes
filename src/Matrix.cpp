@@ -402,3 +402,71 @@ Matrix Matrix::mul(Matrix &a, int num) {
       c[i][j] = a[i][j] * num;
   return c;
 }
+
+bool operator>(const Matrix &a, const Matrix &b) {
+  int sum1 = 0;
+  for (int i = 0; i < a.lines; ++i) {
+    for (int j = 0; j < a.columns; ++j) sum1 = a[i][j]++;
+  }
+  int sum2 = 0;
+  for (int i = 0; i < b.lines; ++i) {
+    for (int j = 0; j < b.columns; ++j) {
+      sum2 = b[i][j]++;
+    }
+  }
+  if (sum1 > sum2) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+bool operator<(const Matrix &a, const Matrix &b) {
+  int sum1 = 0;
+  for (int i = 0; i < a.lines; ++i) {
+    for (int j = 0; j < a.columns; ++j) {
+      sum1 = a[i][j]++;
+    }
+  }
+  int sum2 = 0;
+  for (int i = 0; i < b.lines; ++i) {
+    for (int j = 0; j < b.columns; ++j) {
+      sum2 = b[i][j]++;
+    }
+  }
+  if (sum1 < sum2) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+bool operator==(Matrix &a, Matrix &b) {
+  if (a.lines != b.lines || a.columns != b.columns)
+    return false;
+  for (int i = 0; i < b.lines; ++i) {
+    for (int j = 0; j < b.columns; ++j) {
+      if (b[i][j] != a[i][j]) {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+bool operator!=(Matrix &a, Matrix &b) {
+  if (a.lines != b.lines || a.columns != b.columns)
+    return false;
+  for (int i = 0; i < b.lines; ++i) {
+    for (int j = 0; j < b.columns; ++j) {
+      if (b[i][j] != a[i][j]) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+int *Matrix::operator[](int a) const {
+  return num[a];
+}
+

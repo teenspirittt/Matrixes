@@ -44,6 +44,7 @@ class Matrix {
   void sort_by_line(int n);
   void sort_by_column(int n);
   virtual int *operator[](int a);
+  int *operator[](int a) const;
   Matrix &operator=(const Matrix &a);
   Matrix operator+(Matrix &a);
   Matrix operator-(Matrix &a);
@@ -51,6 +52,11 @@ class Matrix {
   struct coords get_coords(int digit);
   friend istream &operator>>(istream &stream, Matrix &matrix);
   friend ostream &operator<<(ostream &stream, Matrix &matrix);
+  friend bool operator>(const Matrix &a, const Matrix &b);
+  friend bool operator<(const Matrix &a, const Matrix &b);
+  friend bool operator==(Matrix &a, Matrix &b);
+  friend bool operator!=(Matrix &a, Matrix &b);
+
   ofstream &to_bin(ofstream &out);
   ifstream &from_bin(ifstream &in);
   Matrix mul(Matrix &a, Matrix &b);

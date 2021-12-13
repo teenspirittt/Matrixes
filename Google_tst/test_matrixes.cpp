@@ -12,6 +12,7 @@
 TEST(lab1_tests, constructor_tests) {
   Matrix matrix(9, 9);
   Matrix cmp_matrix(9, 9);
+  ASSERT_THROW(Matrix j(-4, 5), invalid_argument);
   ASSERT_EQ(matrix.get_width(), 9);
   ASSERT_EQ(matrix.get_height(), 9);
   ASSERT_STREQ(matrix.get_matrix(), cmp_matrix.get_matrix());
@@ -69,7 +70,7 @@ TEST(lab1_tests, sort_LC_test) {
 
   matrix.sort_by_column(1);
   cmp_matrix.sort_by_column(1);
-
+  ASSERT_THROW(matrix.sort_by_line(-1), invalid_argument);
   ASSERT_EQ(matrix.get_height(), 9);
   ASSERT_EQ(cmp_matrix.get_height(), 9);
   ASSERT_EQ(matrix.get_width(), 9);
@@ -469,15 +470,15 @@ TEST(lab8_tests, lst_timeCheck) {
 
 TEST(lab8_tests, multimap_timeCheck) {
   cout << "\nMultiMap\n";
-  multimap<Matrix, Matrix> m;
-  multimap<Matrix, Matrix>::iterator m_Iter;
-  typedef pair<Matrix, Matrix> Matrix_Pair;
+  multimap<Matrix, int> m;
+  multimap<Matrix, int>::iterator m_Iter;
+  int num1 = 1;
   const Matrix bv(3, 3);
-  Matrix a(4, 5);
-  Matrix b(5, 8);
+  Matrix a(3, 3);
+  Matrix b;
   Matrix i(3, 3);
   clock_t startTime = clock();
-  m.insert(Matrix_Pair(a, b));
+  m.insert(make_pair(bv, num1));
   for (int i = 0; i < 10000; ++i) {
 
   }
@@ -485,7 +486,7 @@ TEST(lab8_tests, multimap_timeCheck) {
   cout << "Insert: " << clock() - startTime << endl;
   startTime = clock();
   for (; m_Iter != m.end(); m_Iter++) {
-    m.find(&a);
+    m.find(a);
   }
   cout << "Find: " << clock() - startTime << endl;
   startTime = clock();
